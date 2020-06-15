@@ -106,6 +106,9 @@ SchemaAlignmentDialog.setUpTabs = function() {
   /**
    * Init the schema tab
    */
+  var url = ReconciliationManager.ensureDefaultServicePresent();
+  SchemaAlignmentDialog._reconService = ReconciliationManager.getServiceFromUrl(url);
+
   var schemaTab = $(DOM.loadHTML("wikidata", "scripts/schema-alignment-tab.html")).appendTo(this._schemaPanel);
   var schemaElmts = this._schemaElmts = DOM.bind(schemaTab);
   schemaElmts.dialogExplanation.text($.i18n('wikidata-schema/dialog-explanation'));
@@ -132,9 +135,6 @@ SchemaAlignmentDialog.setUpTabs = function() {
 
   // Init the column area
   this.updateColumns();
-
-  var url = ReconciliationManager.ensureDefaultServicePresent();
-  SchemaAlignmentDialog._reconService = ReconciliationManager.getServiceFromUrl(url);
 
   /**
    * Init the issues tab
